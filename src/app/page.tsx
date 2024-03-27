@@ -12,13 +12,15 @@ type Character = {
 export default function Home() {
     const [characters, setCharacters] = useState<Character[]>([])
 
+    const fetchCharacters = async (): Promise<Character[]> => {
+        const response = await fetch("https://api.disneyapi.dev/character")
+        const fetchedData = await response.json()
+        return fetchedData.data
+    }
+
     useEffect(() => {
-        fetch("https://api.disneyapi.dev/character")
-            .then(res => res.json())
-            .then(data => {
-                setCharacters(data.data)
-            })
-    }, [characters]);
+        fetchCharacters().then(setCharacters)
+    }, []);
 
     return (
         <main>
