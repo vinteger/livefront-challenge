@@ -7,6 +7,9 @@ export type Character = {
 
 export const fetchCharacters = async (): Promise<Character[]> => {
     const response = await fetch("https://api.disneyapi.dev/character")
-    const fetchedData = await response.json()
+    if (!response.ok) {
+        throw new Error("Network response was not ok")
+    }
+    const fetchedData = await response.json();
     return fetchedData.data
 }

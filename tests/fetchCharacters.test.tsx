@@ -11,6 +11,7 @@ describe("Fetch Characters", () => {
 
     it("fetches characters successfully", async () => {
         mockFetch.mockResolvedValueOnce({
+            ok: true,
             json: () => ({data: mockData.data})
         })
         const characters = await fetchCharacters()
@@ -18,4 +19,12 @@ describe("Fetch Characters", () => {
         expect(mockFetch).toHaveBeenCalledWith("https://api.disneyapi.dev/character");
         expect(characters.length).toEqual(mockData.data.length)
     })
+
+    it('throws an error when the fetch fails', async () => {
+        mockFetch.mockResolvedValueOnce({
+            ok: false,
+        });
+
+        await expect(fetchCharacters()).rejects.toThrow('Network response was not ok');
+    });
 })
