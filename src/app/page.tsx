@@ -22,13 +22,15 @@ const Home = () => {
             <h1>Disney Character Page</h1>
             {characters.map((char, index) => {
                 return (
-                    <Image
-                        key={`${index}-${char.id}`}
-                        alt={char.name}
-                        src={char.imageUrl}
-                        width={100}
-                        height={100}
-                    />
+                    <figure key={`${index}-${char.id}`}>
+                        <Image
+                            alt={char.name}
+                            src={char.imageUrl}
+                            width={100}
+                            height={100}
+                        />
+                        <figcaption>{char.name}</figcaption>
+                    </figure>
                 )
             })}
         </main>
