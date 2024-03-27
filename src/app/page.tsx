@@ -1,22 +1,10 @@
 'use client'
 import {useEffect, useState} from "react";
 import Image from 'next/image'
+import {Character, fetchCharacters} from "@/api/fetchCharacters";
 
-type Character = {
-    id: string,
-    name: string,
-    imageUrl: string,
-    sourceUrl: string,
-}
-
-export default function Home() {
+const Home = () => {
     const [characters, setCharacters] = useState<Character[]>([])
-
-    const fetchCharacters = async (): Promise<Character[]> => {
-        const response = await fetch("https://api.disneyapi.dev/character")
-        const fetchedData = await response.json()
-        return fetchedData.data
-    }
 
     useEffect(() => {
         fetchCharacters().then(setCharacters)
@@ -39,3 +27,5 @@ export default function Home() {
         </main>
     );
 }
+
+export default Home
