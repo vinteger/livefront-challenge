@@ -5,10 +5,17 @@ import {Character, fetchCharacters} from "@/api/fetchCharacters";
 
 const Home = () => {
     const [characters, setCharacters] = useState<Character[]>([])
+    const [error, setError] = useState<boolean>(false)
 
     useEffect(() => {
-        fetchCharacters().then(setCharacters)
+        fetchCharacters()
+            .then(setCharacters)
+            .catch(_e => setError(true))
     }, []);
+
+    if (error) {
+        return <p>Sorry an error has occurred. Try again later.</p>
+    }
 
     return (
         <main>

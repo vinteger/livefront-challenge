@@ -2,8 +2,8 @@ import {mockData} from "../__mocks__/mockData";
 import {fetchCharacters} from "@/api/fetchCharacters";
 
 global.fetch = jest.fn();
-
 const mockFetch = (fetch as jest.Mock)
+
 describe("Fetch Characters", () => {
     beforeEach(() => {
         mockFetch.mockClear();
@@ -12,7 +12,7 @@ describe("Fetch Characters", () => {
     it("fetches characters successfully", async () => {
         mockFetch.mockResolvedValueOnce({
             ok: true,
-            json: () => ({data: mockData.data})
+            json: () => Promise.resolve(mockData)
         })
         const characters = await fetchCharacters()
         expect(mockFetch).toHaveBeenCalledTimes(1)
