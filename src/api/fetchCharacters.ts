@@ -1,8 +1,11 @@
 export type Character = {
-    id: string,
+    _id: string,
     name: string,
     imageUrl: string,
     sourceUrl: string,
+    films: string[]
+    tvShows: string[]
+    videoGames: string[]
 }
 
 export const fetchCharacters = async (): Promise<Character[]> => {
